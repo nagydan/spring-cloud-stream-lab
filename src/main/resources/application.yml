@@ -1,0 +1,23 @@
+spring:
+  cloud:
+    stream:
+      function:
+        definition: #TODO: Add definitions
+
+      #TODO: ADD bindings
+
+      kafka:
+        binder:
+          brokers: localhost:9092
+          auto-create-topics: false
+          minPartitionCount: 10
+          configuration.auto.offset.reset: earliest
+          headers: x-retries
+          producer-properties:
+            key.serializer: org.apache.kafka.common.serialization.StringSerializer
+            #TODO: Add value serializer
+#            schema.registry.url: http://localhost:8081
+          consumer-properties:
+            key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+            value.deserializer: io.confluent.kafka.serializers.protobuf.KafkaProtobufDeserializer
+#            schema.registry.url: http://localhost:8081

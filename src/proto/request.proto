@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package com.training.springcloud.kafkastreams;
+
+message TransactionRequest {
+  //TODO: implement the message
+}

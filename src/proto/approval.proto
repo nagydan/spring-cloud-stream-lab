@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package com.training.springcloud.kafkastreams;
+
+message TransactionApproval {
+  //TODO: implement the message
+}
+
+enum TransactionResult {
+  UNUSED_TT = 0;
+  APPROVED = 1;
+  DECLINED = 2;
+}
+
+enum TransactionDirection {
+  UNUSED_TD = 0;
+  DEBIT = 1;
+  CREDIT = 2;
+}
