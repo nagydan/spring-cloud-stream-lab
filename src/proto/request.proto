@@ -3,5 +3,25 @@ syntax = "proto3";
 package com.training.springcloud.kafkastreams;
 
 message TransactionRequest {
-  //TODO: implement the message
+  string id = 1;
+  int64 amount = 2;
+  string accountId = 3;
+  TransactionType transactionType = 5;
+  TransactionDirection transactionDirection = 6 ;
+  string userId = 7 ;
+  int64 timestamp = 100;
+}
+
+enum TransactionType {
+  UNUSED_TT = 0;
+  CARD = 1;
+  DOMESTIC_BANK_TRANSFER = 2;
+  BLOCK = 4;
+  UNBLOCK = 5;
+}
+
+enum TransactionDirection {
+  UNUSED_TD = 0;
+  DEBIT = 1;
+  CREDIT = 2;
 }

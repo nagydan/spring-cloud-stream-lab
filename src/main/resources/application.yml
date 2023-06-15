@@ -2,22 +2,38 @@ spring:
   cloud:
     stream:
       function:
-        definition: #TODO: Add definitions
+        definition: approve;transactionGenerator;fraudDetector
+      poller:
+        fixedDelay: 3000
 
-      #TODO: ADD bindings
+      bindings:
+        transactionGenerator-out-0:
+          destination: transaction-request
+          producer:
+            use-native-encoding: true
+        approve-in-0:
+          destination: transaction-request
+          group: ta-1
+        approve-out-0:
+          destination: transaction-approval
+          producer:
+            use-native-encoding: true
+        fraudDetector-in-0:
+          destination: transaction-approval
+          group: fraudDetector-1
 
       kafka:
         binder:
           brokers: localhost:9092
-          auto-create-topics: false
+          auto-create-topics: true
           minPartitionCount: 10
           configuration.auto.offset.reset: earliest
           headers: x-retries
           producer-properties:
             key.serializer: org.apache.kafka.common.serialization.StringSerializer
-            #TODO: Add value serializer
-#            schema.registry.url: http://localhost:8081
+            value.serializer: io.confluent.kafka.serializers.protobuf.KafkaProtobufSerializer
+            schema.registry.url: http://localhost:8081
           consumer-properties:
             key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
             value.deserializer: io.confluent.kafka.serializers.protobuf.KafkaProtobufDeserializer
-#            schema.registry.url: http://localhost:8081
+            schema.registry.url: http://localhost:8081

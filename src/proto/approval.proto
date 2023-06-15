@@ -3,7 +3,13 @@ syntax = "proto3";
 package com.training.springcloud.kafkastreams;
 
 message TransactionApproval {
-  //TODO: implement the message
+  string id = 1;
+  int64 amount = 2;
+  int64 balance = 3;
+  string accountId = 4;
+  string approvedTransactionId = 5;
+  TransactionResult transactionResult = 6;
+  TransactionDirection transactionDirection = 7;
 }
 
 enum TransactionResult {
